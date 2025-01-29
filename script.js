@@ -141,8 +141,8 @@ function showResult() {
 
     if (score === questions.length) {
         const resultLink = document.createElement('a');
-        resultLink.href = 'https://www.example.com';
-        resultLink.textContent = 'Click here for your reward!';
+        resultLink.href = 'https://gift.truemoney.com/campaign?v=0194b10360797c42a77221073a0133e79e5';
+        resultLink.textContent = 'เก่งมากครับพี่ชาย';
         quizContent.appendChild(resultLink);
     }
 
