@@ -5,17 +5,36 @@ let selectedChoice = null;
 
 const questions = [
     {
-        question: "What is the capital of France?",
-        choices: ["London", "Berlin", "Paris", "Madrid"],
-        correct: 3,
-        explanation: "Paris is the capital of France."
+        question: "วันนี้วันอะไร?",
+        choices: ["ข้างแรมที่ 9", "29/1/2025", "พุธ", "ตรุษจืน"],
+        correct: 2,
     },
     {
-        question: "Which planet is closest to the Sun?",
-        choices: ["Venus", "Mars", "Mercury", "Earth"],
+        question: "ตอนนี้ IG ห้องมีผู้ติดตามประมาณกี่คน?",
+        choices: ["310+", "320+", "330+", "340+"],
         correct: 2,
-        explanation: "Mercury is the closest planet to the Sun."
+    },
+    {
+        question: "ตอนนี้ IG ห้องกดติดตามกี่แอค?",
+        choices: ["33", "31", "29", "27"],
+        correct: 1,
+    },
+    {
+        question: "โพสต์พระศาสตราจารย์ลูกศร วัดอวตาร #ภูมิปกรณ์ มีจำนวนกดไลก์เท่าไหร่?",
+        choices: ["48", "59", "67", "70"],
+        correct: 2,
+    },
+    {
+        question: "โพสต์แรก IG ห้อง โพสต์วันที่?",
+        choices: ["17 May", "20 May", "22 May", "19 May"],
+        correct: 0,
+    },
+    {
+        question: "?",
+        choices: [" ", " ", " ", " "],
+        correct: 3,
     }
+    
 ];
 
 function startQuiz() {
@@ -74,6 +93,11 @@ function selectAnswer(index) {
     choices.children[index].classList.add('selected');
 }
 
+function lastSubmit(){
+    document.getElementById('submit-answer').style.display = 'none';
+    document.getElementById('last-sumbit').style.display = 'block';
+}
+
 function submitAnswer() {
     if (selectedChoice === null) {
         alert("Please select an answer");
@@ -106,12 +130,16 @@ function submitAnswer() {
 
         document.getElementById('submit-answer').style.display = 'block';
         
-        if (currentQuestion < questions.length) {
+        if (currentQuestion < questions.length - 1) {
             showQuestion();
-        } else {
+        } else if (currentQuestion === questions.length - 1) {
+            showQuestion();
+            lastSubmit();
+        }
+        else {
             showResult();
         }
-    }, 1000);
+    }, 0);
 }
 
 function sendScoreToDiscord(userData) {
@@ -133,6 +161,8 @@ function sendScoreToDiscord(userData) {
 }
 
 function showResult() {
+    document.getElementById('last-sumbit').style.display = 'none';
+    
     const quizContent = document.getElementById('quiz-content');
     quizContent.innerHTML = `
         <h2>Quiz Completed!</h2>
